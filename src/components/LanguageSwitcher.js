@@ -1,4 +1,6 @@
 import React from "react";
+import { useTranslation } from 'react-i18next';
+
 // import PropTypes from "prop-types";
 import enTranslation from "../locales/en/translation.json";
 import afTranslation from "../locales/af/translation.json";
@@ -15,8 +17,9 @@ import zuTranslation from "../locales/zu/translation.json";
 
 // import other language translation files as needed
 
-const LanguageSwitcher = ({ changeLanguage }) => {
-const languages = [
+// const { t } = useTranslation();
+const LanguageSwitcher = ({changeLanguage}) => {
+  const languages = [
 { code: "af", name: "Afrikaans" },
 { code: "ar", name: "العربية" },
 { code: "en", name: "English" },
@@ -32,59 +35,21 @@ const languages = [
 ];
 
 const handleChange = (event) => {
-const languageCode = event.target.value;
-changeLanguage(languageCode);
+    const languageCode = event.target.value;
+    changeLanguage(languageCode);
+  };
+
+  return (
+    <div className="language-switcher">
+      <select onChange={handleChange}>
+        {languages.map(({ code, name }) => (
+          <option key={code} value={code}>
+            {name}
+          </option>
+        ))}
+      </select>
+    </div>
+  );
 };
 
-const getTranslation = (langCode) => {
-switch (langCode) {
-case "af":
-return afTranslation;
-case "ar":
-return arTranslation;
-case "en":
-return enTranslation;
-case "ha":
-return haTranslation ;
-case "ig":
-return igTranslation ;
-case "pi":
-return piTranslation;
-case "sh":
-return shTranslation;
-case "so":
-return soTranslation ;
-case "sw":
-return swTranslation ;
-case "xh":
-return xhTranslation ;
-case "yo":
-return yoTranslation;
-case "zu":
-return zuTranslation;
-default:
-return enTranslation;
-}
-};
-
-return (
-<div className="language-switcher">
-<select onChange={handleChange}>
-{languages.map(({ code, name }) => (
-<option key={code} value={code}>
-{name}
-</option>
-))}
-</select>
-<ul>
-{Object.entries(getTranslation()).map(([key, value]) => (
-<li key={key}>
-{key}: {value}
-
-</li>
-))}
-</ul>
-</div>
-);
-}
 export default LanguageSwitcher;

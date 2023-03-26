@@ -5,14 +5,22 @@ import LanguageSwitcher from './LanguageSwitcher';
 import {useState} from 'react';
 
 function Home() {
-const [showModal, setShowModal] = useState(false);
-const { t, i18n } = useTranslation();
+  const [showLanguageSwitcher, setShowLanguageSwitcher] = useState(false);
+  const { t, i18n } = useTranslation();
 
-const changeLanguage = (languageCode) => {
-i18n.changeLanguage(languageCode);
-};
+  const changeLanguage = (languageCode) => {
+    i18n.changeLanguage(languageCode);
+    setShowLanguageSwitcher(false);
+  };
 
   return (
+    <>
+         {showLanguageSwitcher && (
+        <LanguageSwitcher changeLanguage={changeLanguage} />
+      )}
+      <button onClick={() => setShowLanguageSwitcher(!showLanguageSwitcher)}>
+        Change Language
+      </button>
 <Container className="mt-5">
 <Container className="bg-primary text-white text-center p-5">
 <h3 className="text-center">{t('welcome_message')}</h3>
@@ -61,19 +69,16 @@ i18n.changeLanguage(languageCode);
 </Card>
 </Col>
 </Row>
-<Row className="mt-5">
-        <Col className="d-flex justify-content-center">
-          <Modal show={showModal} onHide={() => setShowModal(false)}>
-            <Modal.Header closeButton>
-              <Modal.Title>Language Switcher</Modal.Title>
-            </Modal.Header>
-            <Modal.Body>
-              <LanguageSwitcher changeLanguage={changeLanguage} />
-            </Modal.Body>
-          </Modal>
-        </Col>
-      </Row>
+{/* <Modal show={showModal} onHide={() => setShowModal(false)}>
+        <Modal.Header closeButton>
+          <Modal.Title>Language Switcher</Modal.Title>
+</Modal.Header>
+<Modal.Body>
+<LanguageSwitcher changeLanguage={changeLanguage} />
+</Modal.Body>
+</Modal> */}
 </Container>
+</>
 );
 }
 
