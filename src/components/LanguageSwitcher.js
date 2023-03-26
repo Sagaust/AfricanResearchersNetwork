@@ -20,7 +20,7 @@ import zuTranslation from "../locales/zu/translation.json";
 // const { t } = useTranslation();
 const LanguageSwitcher = ({changeLanguage}) => {
   const languages = [
-{ code: "af", name: "Afrikaans" },
+{ code: "af", name: "None" },
 { code: "ar", name: "العربية" },
 { code: "en", name: "English" },
 { code: "ha", name: "Hausa" },
@@ -32,6 +32,7 @@ const LanguageSwitcher = ({changeLanguage}) => {
 { code: "xh", name: "Xhosa" },
 { code: "yo", name: "Yoruba" },
 { code: "zu", name: "Zulu" },
+{ code: "af", name: "Afrikaans" }
 ];
 
 const handleChange = (event) => {
